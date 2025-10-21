@@ -55,8 +55,6 @@ AzureNetworkAnalyticsIPDetails_CL
 Unusual volume of outbound connections suggested command-and-control (C2) or scanning behavior.
 Further investigation was warranted.
 
-> ![Screenshot 1 – Initial Query Results](path/to/screenshot1.png)
-
 ---
 
 ## Investigation Steps
@@ -120,8 +118,6 @@ DeviceNetworkEvents
 ```
 
 **Result:** 52,522 instances in 24 hours.
-
-> ![Screenshot 2 – Expanded Network Events](path/to/screenshot2.png)
 
 ---
 
@@ -187,8 +183,6 @@ bash -c "ps aux | grep astats | grep -v grep | wc -l"
 * Counts running `astats` processes.
 * Likely used by malware to prevent duplicate instances.
 
-> ![Screenshot 3 – DeviceFileEvents Evidence](path/to/screenshot3.png)
-
 ---
 
 ## Malicious Behavior Analysis
@@ -219,8 +213,6 @@ This aligns with:
 * SSH scan targets (`-scan ssh 1 az`)
 * Hourly cron-based re-execution
 * Potential credential reuse attempts across internal Azure network
-
-> ![Screenshot 4 – Defender Alert](path/to/screenshot4.png)
 
 ---
 
