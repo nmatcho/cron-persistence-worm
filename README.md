@@ -9,22 +9,22 @@ Investigated a Linux incident where a malicious cron job attempted to maintain p
 ---
 
 ## 🗂️ Table of Contents
-1. [🧠 Overview](#overview)
-2. [🔍 Initial Discovery](#initial-discovery)
-3. [🔬 Investigation Steps](#investigation-steps)
+1. [Overview](#overview)
+2. [Initial Discovery](#initial-discovery)
+3. [Investigation Steps](#investigation-steps)
     - [First Glance](#first-glance)
     - [Second Glance](#second-glance)
     - [Expanded Search](#expanded-search)
     - [🧾 File System Investigation](#file-system-investigation)
-4. [🧬 Malicious Behavior Analysis](#malicious-behavior-analysis)
-5. [🌐 Lateral Movement and Worm Indicators](#lateral-movement-and-worm-indicators)
-6. [🛠️ Response Actions](#response-actions)
-7. [🧾 Findings Summary](#findings-summary)
-8. [📚 Lessons Learned](#lessons-learned)
+4. [Malicious Behavior Analysis](#malicious-behavior-analysis)
+5. [Lateral Movement and Worm Indicators](#lateral-movement-and-worm-indicators)
+6. [Response Actions](#response-actions)
+7. [Findings Summary](#findings-summary)
+8. [Lessons Learned](#lessons-learned)
 
 ---
 
-## 🧠 Overview
+## Overview
 A huge network activity spike at midnight on October 20 launched a threat hunting campaign to uncover the cause. During the investigation of Microsoft Sentinel data sources, a Linux virtual machine named compromised-linux-vm (NAME REDACTED FOR PRIVACY) was identified exhibiting **high-volume outbound SSH scanning behavior** and evidence of **malicious script execution** within `/dev/shm` — a volatile memory-based directory often abused by attackers.
 
 The investigation uncovered:
@@ -37,7 +37,7 @@ The VM was confirmed **compromised** and isolated for further analysis.
 
 ---
 
-## 🔍 Initial Discovery
+## Initial Discovery
 
 **Data Source:** `AzureNetworkAnalyticsIPDetails_CL`  
 **Initial Query:**
@@ -59,7 +59,7 @@ Further investigation was warranted.
 
 ---
 
-## 🔬 Investigation Steps
+## Investigation Steps
 
 ### First Glance
 
@@ -191,7 +191,7 @@ bash -c "ps aux | grep astats | grep -v grep | wc -l"
 
 ---
 
-## 🧬 Malicious Behavior Analysis
+## Malicious Behavior Analysis
 
 | Indicator                                  | Description                                         | Severity     |
 | ------------------------------------------ | --------------------------------------------------- | ------------ |
@@ -210,7 +210,7 @@ bash -c "ps aux | grep astats | grep -v grep | wc -l"
 
 ---
 
-## 🌐 Lateral Movement and Worm Indicators
+## Lateral Movement and Worm Indicators
 
 Microsoft Sentinel generated **Lateral Movement** alerts for the same VM.
 
@@ -224,7 +224,7 @@ This aligns with:
 
 ---
 
-## 🛠️ Response Actions
+## Response Actions
 
 1. **Isolated the VM** in Azure Security Center to prevent further spread.
 2. **Ran malware scans** to verify infection scope.
@@ -234,7 +234,7 @@ This aligns with:
 
 ---
 
-## 🧾 Findings Summary
+## Findings Summary
 
 | Category              | Details                                                                      |
 | --------------------- | ---------------------------------------------------------------------------- |
@@ -248,7 +248,7 @@ This aligns with:
 
 ---
 
-## 📚 Lessons Learned
+## Lessons Learned
 
 * `/dev/shm` is a critical directory to monitor on Linux systems.
 * Persistent cron entries often reveal post-exploitation activity.
