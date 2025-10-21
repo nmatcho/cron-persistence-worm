@@ -16,17 +16,16 @@ Investigated a Linux incident where a malicious cron job attempted to maintain p
     - [Second Glance](#second-glance)
     - [Expanded Search](#expanded-search)
     - [🧾 File System Investigation](#file-system-investigation)
-4. [Key Malicious Artifacts](#key-malicious-artifacts)
-5. [🧬 Malicious Behavior Analysis](#malicious-behavior-analysis)
-6. [🌐 Lateral Movement and Worm Indicators](#lateral-movement-and-worm-indicators)
-7. [Response Actions](#response-actions)
-8. [Findings Summary](#findings-summary)
-9. [Lessons Learned](#lessons-learned)
+4. [🧬 Malicious Behavior Analysis](#malicious-behavior-analysis)
+5. [🌐 Lateral Movement and Worm Indicators](#lateral-movement-and-worm-indicators)
+6. [🛠️ Response Actions](#response-actions)
+7. [🧾 Findings Summary](#findings-summary)
+8. [📚 Lessons Learned](#lessons-learned)
 
 ---
 
 ## 🧠 Overview
-During proactive threat hunting on Microsoft Sentinel data sources, a Linux virtual machine named compromised-linux-vm (NAME REDACTED FOR PRIVACY) was identified exhibiting **high-volume outbound SSH scanning behavior** and evidence of **malicious script execution** within `/dev/shm` — a volatile memory-based directory often abused by attackers.
+A huge network activity spike at midnight on October 20 launched a threat hunting campaign to uncover the cause. During the investigation of Microsoft Sentinel data sources, a Linux virtual machine named compromised-linux-vm (NAME REDACTED FOR PRIVACY) was identified exhibiting **high-volume outbound SSH scanning behavior** and evidence of **malicious script execution** within `/dev/shm` — a volatile memory-based directory often abused by attackers.
 
 The investigation uncovered:
 - 400K+ network events to AWS IP ranges.
