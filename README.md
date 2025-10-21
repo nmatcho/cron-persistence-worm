@@ -21,9 +21,7 @@ Investigated a Linux incident where a malicious cron job attempted to maintain p
 6. [Lateral Movement and Worm Indicators](#lateral-movement-and-worm-indicators)
 7. [Response Actions](#response-actions)
 8. [Findings Summary](#findings-summary)
-9. [Screenshots](#screenshots)
-10. [Lessons Learned](#lessons-learned)
-11. [Appendix: KQL Queries](#appendix-kql-queries)
+9. [Lessons Learned](#lessons-learned)
 
 ---
 
@@ -248,15 +246,6 @@ This aligns with:
 | **Detection Sources** | `DeviceNetworkEvents`, `DeviceFileEvents`, Microsoft Sentinel Alerts         |
 | **Impact**            | Network noise, potential spread to other VMs, possible credential harvesting |
 | **Status**            | VM isolated, investigation concluded                                         |
-
----
-
-## 🖼️ Screenshots
-
-> ![Screenshot 1 – Initial Query](path/to/screenshot1.png)
-> ![Screenshot 2 – Network Activity](path/to/screenshot2.png)
-> ![Screenshot 3 – Malicious Commands](path/to/screenshot3.png)
-> ![Screenshot 4 – Lateral Movement Alert](path/to/screenshot4.png)
 
 ---
 
