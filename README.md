@@ -9,16 +9,16 @@ Investigated a Linux incident where a malicious cron job attempted to maintain p
 ---
 
 ## 🗂️ Table of Contents
-1. [Overview](#overview)
-2. [Initial Discovery](#initial-discovery)
-3. [Investigation Steps](#investigation-steps)
+1. [🧠 Overview](#overview)
+2. [🔍 Initial Discovery](#initial-discovery)
+3. [🔬 Investigation Steps](#investigation-steps)
     - [First Glance](#first-glance)
     - [Second Glance](#second-glance)
     - [Expanded Search](#expanded-search)
-    - [File System Investigation](#file-system-investigation)
+    - [🧾 File System Investigation](#file-system-investigation)
 4. [Key Malicious Artifacts](#key-malicious-artifacts)
-5. [Malicious Behavior Analysis](#malicious-behavior-analysis)
-6. [Lateral Movement and Worm Indicators](#lateral-movement-and-worm-indicators)
+5. [🧬 Malicious Behavior Analysis](#malicious-behavior-analysis)
+6. [🌐 Lateral Movement and Worm Indicators](#lateral-movement-and-worm-indicators)
 7. [Response Actions](#response-actions)
 8. [Findings Summary](#findings-summary)
 9. [Lessons Learned](#lessons-learned)
@@ -62,7 +62,7 @@ Further investigation was warranted.
 
 ## 🔬 Investigation Steps
 
-### 🥇 First Glance
+### First Glance
 
 Focused on IPs beginning with `34.243` (AWS Ireland range).
 Queried the **DeviceNetworkEvents** table for correlation.
@@ -88,7 +88,7 @@ Discovered repeated executions of:
 
 ---
 
-### 🥈 Second Glance
+### Second Glance
 
 Expanded query to confirm scale and timeline:
 
@@ -108,7 +108,7 @@ DeviceNetworkEvents
 
 ---
 
-### 🥉 Expanded Search
+### Expanded Search
 
 Querying a broader IP range (`34.24`) revealed:
 
