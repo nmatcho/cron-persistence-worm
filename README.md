@@ -15,7 +15,7 @@ Investigated a Linux incident where a malicious cron job attempted to maintain p
     - [First Glance](#first-glance)
     - [Second Glance](#second-glance)
     - [Expanded Search](#expanded-search)
-    - [🧾 File System Investigation](#file-system-investigation)
+    - [File System Investigation](#file-system-investigation)
 4. [Malicious Behavior Analysis](#malicious-behavior-analysis)
 5. [Lateral Movement and Worm Indicators](#lateral-movement-and-worm-indicators)
 6. [Response Actions](#response-actions)
@@ -125,7 +125,7 @@ DeviceNetworkEvents
 
 ---
 
-## 🧾 File System Investigation
+## File System Investigation
 
 Queried **DeviceFileEvents** to identify file operations:
 
