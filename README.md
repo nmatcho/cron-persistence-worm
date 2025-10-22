@@ -81,8 +81,6 @@ Discovered repeated executions of:
 /dev/shm/astats -scan ssh 1 az
 ```
 
-**Count:** 6,434 executions.
-
 ---
 
 ### Second Glance
@@ -103,6 +101,8 @@ DeviceNetworkEvents
 * `-scan ssh` implies network reconnaissance.
 * Behavior consistent with malware performing **SSH brute-force propagation**.
 
+**Count:** 6,434 executions.
+
 ---
 
 ### Expanded Search
@@ -117,7 +117,7 @@ DeviceNetworkEvents
 | summarize WhatIsGoingOn = count()
 ```
 
-**Result:** 52,522 instances in 24 hours.
+**Count:** 52,522 executions in 24 hours.
 
 ---
 
