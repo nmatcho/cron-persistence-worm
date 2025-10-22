@@ -25,7 +25,7 @@ Investigated a Linux incident where an automated malware launcher attempted to m
 ---
 
 ## Overview
-A huge network activity spike at midnight on October 20 launched a threat hunting campaign to uncover the cause. During the investigation of Microsoft Sentinel data sources, a Linux virtual machine named compromised-linux-vm (NAME REDACTED FOR PRIVACY) was identified exhibiting **high-volume outbound SSH scanning behavior** and evidence of **malicious script execution** within `/dev/shm` — a volatile memory-based directory often abused by attackers.
+A huge network activity spike at midnight on October 20 launched a threat hunting campaign to uncover the cause. During the investigation of Microsoft Sentinel data sources, a Linux virtual machine named compromised-linux-vm (NAME REDACTED FOR PRIVACY) was identified exhibiting **high-volume outbound SSH scanning behavior** and evidence of **malicious script execution** within `/dev/shm` — a volatile memory-based directory often abused by attackers.  
 
 The investigation uncovered:
 - 400K+ network events to AWS IP ranges.
@@ -33,7 +33,7 @@ The investigation uncovered:
 - Malicious Bash and cron scripts establishing persistence.
 - Sentinel alerts for **lateral movement**, suggesting worm-like propagation.
 
-The VM was confirmed **compromised** and isolated for further analysis.
+The VM was confirmed **compromised** and isolated for further analysis. The malware in question was later determined to be used for cryptomining and was propagated onto the VM via misconfigurations, which included visbility on the public internet and a lack of brute force protection on the Ubuntu server's root account.
 
 ---
 
@@ -183,6 +183,8 @@ bash -c "ps aux | grep astats | grep -v grep | wc -l"
 * Counts running `astats` processes.
 * Likely used by malware to prevent duplicate instances.
 
+
+
 ---
 
 ## Malicious Behavior Analysis
@@ -218,11 +220,12 @@ This aligns with:
 
 ## Response Actions
 
-1. **Isolated the VM** in Azure Security Center to prevent further spread.
+1. **Isolated the VM** in Microsoft Defender for Endpoint to prevent further spread.
 2. **Ran malware scans** to verify infection scope.
 3. **Correlated Defender alerts** to confirm lateral movement behavior.
 4. **Communicated with VM owner** — confirmed owner was active during event but unaware of `astats` activity.
 5. **Documented and preserved evidence** (screenshots, queries, command logs).
+6. **Escalated to Senior Engineer for Further Investigation** - Senior engineer determined the script to be cryptomining software and identified the root cause misconfigurations.
 
 ---
 
@@ -230,13 +233,13 @@ This aligns with:
 
 | Category              | Details                                                                      |
 | --------------------- | ---------------------------------------------------------------------------- |
-| **Root Cause**        | Compromised Linux VM executing malicious in-memory scripts                   |
+| **Root Cause**        | Ubuntu VM was misconfigured to be internet facing w/o brute force protection |
 | **Primary Indicator** | `/dev/shm/astats -scan ssh 1 az`                                             |
 | **Persistence**       | Cron jobs calling `/dev/shm/w.sh`                                            |
 | **Propagation**       | SSH scanning across network and public IP ranges                             |
 | **Detection Sources** | `DeviceNetworkEvents`, `DeviceFileEvents`, Microsoft Sentinel Alerts         |
-| **Impact**            | Network noise, potential spread to other VMs, possible credential harvesting |
-| **Status**            | VM isolated, investigation concluded                                         |
+| **Impact**            | Network noise, Confirmed no spread to other VMs                              |
+| **Status**            | Incident Escalated, Root Cause Identified and Remediated, Incident Closed    |
 
 ---
 
@@ -245,7 +248,7 @@ This aligns with:
 * `/dev/shm` is a critical directory to monitor on Linux systems.
 * Persistent cron entries often reveal post-exploitation activity.
 * High-frequency outbound SSH traffic should always trigger investigation.
-* Even test or lab VMs must have EDR monitoring and least-privilege SSH configurations.
+* Ensure test VMs have proper network segmentation to prevent public exposure.
 * Manual threat hunting can reveal incidents **before alerts fully trigger**.
 
 ---
