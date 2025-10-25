@@ -33,7 +33,7 @@ The investigation uncovered:
 - Malicious Bash and cron scripts establishing persistence.
 - Sentinel alerts for **lateral movement**, suggesting worm-like propagation.
 
-The VM was confirmed **compromised** and isolated for further analysis. The malware in question was later determined to be used for cryptomining and was propagated onto the VM via misconfigurations, which included visbility on the public internet and a lack of brute force protection on the Ubuntu server's root account.
+The VM was confirmed **compromised** and isolated for further analysis. The malware in question was later determined to be used for cryptomining and was propagated onto the VM via misconfigurations, which included visibility on the public internet and a lack of brute force protection on the Ubuntu server's root account.
 
 ---
 
